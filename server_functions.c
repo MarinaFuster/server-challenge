@@ -43,7 +43,6 @@ void execute_challenge(char * challenge, char * question, char * answer, int cli
     clrscr();
 }
 
-// DONE ? YES
 void libc(int client_socket){
     char * challenge="/lib/x86_64-linux-gnu/libc-2.19.so ?";
     char * answer="/lib/x86_64-linux-gnu/ld-2.19.so\n";
@@ -79,7 +78,6 @@ void quine(int client_socket){
     }
 }
 
-// DONE ? NO
 void many_words(int client_socket){
     char * challenge="Tango Hotel India Sierra India Sierra Alfa Whiskey Echo Sierra Oscar Mike Echo";
     char * answer="this is awesome\n";
@@ -119,7 +117,6 @@ void ebadf(int client_socket){
     pumpkin(client_socket);
 }
 
-// DONE ? NO
 void vocaroo(int client_socket){
     char * challenge="https://vocaroo.com/i/s19015zmR4t8";
     char * answer="nokia\n";
@@ -127,7 +124,6 @@ void vocaroo(int client_socket){
     ebadf(client_socket);
 }
 
-// DONE ? NO
 void shoot_challenges(int client_socket){
     char * challenge="# \\033[D \\033[A \\033[A \\033[D \\033[B \\033[C \\033[B \\033[D *";
     char * answer="#0854780*\n";
