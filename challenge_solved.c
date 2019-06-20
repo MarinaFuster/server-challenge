@@ -32,7 +32,7 @@ int main(int argc , char *argv[])
 	struct sockaddr_in server;
 	server.sin_family = AF_INET;
 	server.sin_addr.s_addr = INADDR_ANY; // shortcut for 0.0.0.0
-	server.sin_port = htons(9004); // port number and htons converts it to the appropiate data format
+	server.sin_port = htons(9009); // port number and htons converts it to the appropiate data format
 
 	// connects to remote server
 	if (connect(socket_desc , (struct sockaddr *)&server , sizeof(server)) == 0)
@@ -51,7 +51,7 @@ int main(int argc , char *argv[])
 		sleep(3);
 		send(socket_desc , ch3 , strlen(ch3) , 0);
 		
-		
+		/*
 		// fourth challenge: nokia
 		char ch4[7] = {'n','o','k','i','a','\n','\0'};
 		puts(ch4);
@@ -112,6 +112,14 @@ int main(int argc , char *argv[])
 		puts(ch12);
 		sleep(3);
 		send(socket_desc , ch12 , strlen(ch12) , 0);
+		*/
+
+		char * buffer = malloc(256);
+		while(1){
+			fgets(buffer, 256, stdin);
+			buffer[strlen(buffer)] = '\0';
+			send(socket_desc,buffer,strlen(buffer),0);
+		}
 
 	}
 	else{

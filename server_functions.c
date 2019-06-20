@@ -119,6 +119,9 @@ void quine(int client_socket){
     }
     else{
         printf("There is something wrong!!!\n");
+        sleep(3);
+        clrscr();
+        quine(client_socket);
     }
 }
 
