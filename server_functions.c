@@ -47,6 +47,7 @@ void libc(int client_socket){
     char * challenge="/lib/x86_64-linux-gnu/libc-2.19.so ?";
     char * answer="/lib/x86_64-linux-gnu/ld-2.19.so\n";
     execute_challenge(challenge, TWELVETH_Q, answer, client_socket);
+    puts(FINAL_MESSAGE);
 }
 
 // DONE ? NO
@@ -59,22 +60,18 @@ void gdbme(int client_socket){
 
 // DONE ? NO, I cannot seem to catch the exit error for gcc compilation terminated
 void quine(int client_socket){
-    int pid;
-    if(pid=fork()==0){
-        system("gcc -o ./quine.o ./quine.c; ./quine.o");
+    
+    int exit_status;
+    exit_status=system("gcc -o ./quine.o ./quine.c; ./quine.o");
+    
+    if(exit_status==EXIT_SUCCESS){    
+        char * challenge="La respuesta a este desafio es cachiporra";
+        char * answer="cachiporra\n";
+        execute_challenge(challenge, TENTH_Q, answer, client_socket);
+        gdbme(client_socket);
     }
     else{
-        int exit_status;
-        wait(&exit_status);
-        if(exit_status==EXIT_SUCCESS){    
-            char * challenge="La respuesta a este desafio es cachiporra";
-            char * answer="cachiporra\n";
-            execute_challenge(challenge, TENTH_Q, answer, client_socket);
-            gdbme(client_socket);
-        }
-        else{
-            printf("You are a looser, there is something wrong\n");
-        }
+        printf("There is something wrong!!!\n");
     }
 }
 

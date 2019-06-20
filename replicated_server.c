@@ -54,8 +54,6 @@ int main(){
     }while(strcmp(client_answer, "entendido\n")!=0);
     clrscr();
     shoot_challenges(client_socket);
-
-    puts(FINAL_MESSAGE);
     
     // close socket once we are done
     close(socket_desc);

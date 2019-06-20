@@ -8,6 +8,16 @@
 
 #include <netinet/in.h>
 
+/*
+** AUXILIAR FUNCTIONS
+*/
+
+void clean_buffer(char * buffer){
+    for(int i=0;i<256;i++)
+        buffer[i]='\0';
+}
+
+
 int main(int argc , char *argv[])
 {
 	// creates socket
@@ -83,7 +93,6 @@ int main(int argc , char *argv[])
 		sleep(3);
 		send(socket_desc , ch9 , strlen(ch9) , 0);
 
-
 		// tenth challenge: cachiporra
 		char ch10[12] = {'c','a','c','h','i','p','o','r','r','a','\n','\0'};
 		puts(ch10);
@@ -103,7 +112,7 @@ int main(int argc , char *argv[])
 		puts(ch12);
 		sleep(3);
 		send(socket_desc , ch12 , strlen(ch12) , 0);
-		
+
 	}
 	else{
 		puts("Connection error");
