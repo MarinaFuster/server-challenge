@@ -105,7 +105,6 @@ void gdbme(int client_socket){
     libc(client_socket);
 }
 
-// DONE ? Almost, the server should wait until the file is created
 void quine(int client_socket){
     
     int exit_status;
