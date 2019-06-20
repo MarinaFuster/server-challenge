@@ -50,7 +50,6 @@ void encode_answer(char random_message[181]){
     // hides the answer in the message
     char * answer="larespuestaalacertijoesindeterminado";
     int answer_length=strlen(answer);
-    printf("La longitud del mensaje es %d\n", answer_length);
 
     int index=0;
     int max=5;
