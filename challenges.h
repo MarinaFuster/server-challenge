@@ -13,9 +13,9 @@ Para verificar que sus respuestas tienen el formato correcto respondan a este de
 
 #define FINAL_MESSAGE "Felicitaciones! Completaste los desafios del server replicado\n"
 
-#define SECOND_Q "¿Cómo descubrieron el protocolo, la dirección y el puerto para conectarse?"
+#define SECOND_Q "¿Cómo descubrieron el protocolo, la dirección y el puerto para conectarse?\n"
 #define THIRD_Q "¿Qué diferencias hay entre TCP y UDP y en qué casos conviene usar cada uno?\n"
-#define FOURTH_Q "¿El puerto que usaron para conectarse al server es el mismo que usan para mandar las respuestas? ¿Por qué?"
+#define FOURTH_Q "¿El puerto que usaron para conectarse al server es el mismo que usan para mandar las respuestas? ¿Por qué?\n"
 #define FIFTH_Q "¿Qué útil abstracción es utilizada para comunicarse con sockets? ¿se puede utilizar read(2) y write(2) para operar?\n"
 #define SIXTH_Q "¿Cómo garantiza TCP que los paquetes llegan en orden y no se pierden?\n"
 #define SEVENTH_Q "Un servidor suele crear un nuevo proceso o thread para atender las conexiones entrantes. ¿Qué conviene más?\n"
