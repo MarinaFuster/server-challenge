@@ -32,7 +32,7 @@ int main(int argc , char *argv[])
 	struct sockaddr_in server;
 	server.sin_family = AF_INET;
 	server.sin_addr.s_addr = INADDR_ANY; // shortcut for 0.0.0.0
-	server.sin_port = htons(9003); // port number and htons converts it to the appropiate data format
+	server.sin_port = htons(9004); // port number and htons converts it to the appropiate data format
 
 	// connects to remote server
 	if (connect(socket_desc , (struct sockaddr *)&server , sizeof(server)) == 0)

@@ -31,7 +31,7 @@ int main(){
     struct sockaddr_in server;
 	server.sin_family = AF_INET;
 	server.sin_addr.s_addr = INADDR_ANY;
-	server.sin_port = htons(9003);
+	server.sin_port = htons(9004);
 
     // binds our IP and port
     bind(socket_desc , (struct sockaddr *)&server , sizeof(server));

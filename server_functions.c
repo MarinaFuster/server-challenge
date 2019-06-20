@@ -4,7 +4,8 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <sys/wait.h>
- #include <unistd.h>
+#include <time.h>
+#include <unistd.h>
 
 #include "challenges.h"
 
@@ -22,6 +23,53 @@ void clrscr(){
 void clean_buffer(char * buffer){
     for(int i=0;i<256;i++)
         buffer[i]='\0';
+}
+
+void encode_answer(char random_message[181]){
+
+    srand(time(0));
+    // fills message with random letters
+    for(int i=0; i<180; i++){
+        random_message[i] = 'a'+((rand() % (25 + 1 - 0)) + 0);
+    }
+    random_message[180]='\0';
+
+    // generates six spaces
+    for(int i=0; i<6; i++){
+        int index = (30*i) + ((rand() % (29 + 1 - 0)) + 0);
+
+        // this is not entirely correct, it could fail in a very special case
+        if( index==0 || (index>0 && random_message[index-1]==' '))
+            random_message[index+1]=' ';
+        else if( index==179 )
+            random_message[index-1]=' ';
+        else
+            random_message[index]=' ';
+    }
+    
+    // hides the answer in the message
+    char * answer="larespuestaalacertijoesindeterminado";
+    int answer_length=strlen(answer);
+    printf("La longitud del mensaje es %d\n", answer_length);
+
+    int index=0;
+    int max=5;
+    int min=1;
+    for(int i=0, j=0; i<answer_length; i++, j++){
+
+        //changes max value for a better distribution
+        if(j%5==0){
+            int left=180-index;
+            max=left/(answer_length-i);
+        }
+
+        index = index + ((rand() % (max + 1 - min)) + min);
+        if(random_message[index]==' ')
+            index=index+1;
+            
+        random_message[index]=answer[i];
+    }
+
 }
 
 /*
@@ -82,11 +130,11 @@ void many_words(int client_socket){
     quine(client_socket);
 }
 
-// DONE ? NO
 void mixed_fds(int client_socket){
-    char * challenge="TODO: function that encodes the answer here";
+    char challenge_message[181];
+    encode_answer(challenge_message);
     char * answer="indeterminado\n";
-    execute_challenge(challenge, EIGHTH_Q, answer, client_socket);
+    execute_challenge(challenge_message, EIGHTH_Q, answer, client_socket);
     many_words(client_socket);
 }
 
