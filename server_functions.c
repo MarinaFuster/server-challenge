@@ -40,9 +40,26 @@ void encode_answer(char random_message[181]){
     int spaces[8];
     spaces[0]=0;
     spaces[7]=179;
+
+    char * words[]={"la", "respuesta", "a", "este", "acertijo", "es", "indeterminada"};
+    int words_length=sizeof(words)/sizeof(sizeof(words[0]));
+    int word_size=2;
+
     for(i=0; i<6; i++){
         int index = (30*i) + ((rand() % (29 + 1 - 0)) + 0);
 
+        if(i==5){
+          word_size=strlen(words[i+1]);
+          if(180-index<word_size){
+            index-=word_size;
+          }
+        }
+        else if(i!=0){
+          word_size=strlen(words[i]);
+          if(index-spaces[i+1]<word_size){
+            index+=word_size-(index-spaces[i+1]);
+          }
+        }
         // this is not entirely correct, it could fail in a very special case
         if( index==0 || (index>0 && random_message[index-1]==' ')){  // For not having two contiguos spaces or at the beginning
             random_message[index+1]=' ';
@@ -59,15 +76,15 @@ void encode_answer(char random_message[181]){
     }
 
 
+    for (i=1; i<sizeof(spaces)/sizeof(spaces[0])-1;i++){
+      printf("ESPACIO %d: %d\n",i, spaces[i] );
+    }
+
 
     // hides the answer in the message
-     char * words[]={"la", "respuesta", "a", "este", "acertijo", "es", "indeterminada"};
-
-     int words_length=sizeof(words)/sizeof(sizeof(words[0]));
-     int j;
-     for (i=0; i<words_length; i++){
-       int word_size=strlen(words[i]);
-       for (j=0; j<word_size; j++){
+     for (int i=0; i<words_length; i++){
+       word_size=strlen(words[i]);
+       for (int j=0; j<word_size; j++){
          int position=rand() % (spaces[i+1]-spaces[i]) + spaces[i];  // Generates position in first word of ANSWER to insert the letter
          if(position==spaces[i]){
            position++;
