@@ -21,7 +21,8 @@ void clrscr(){
 }
 
 void clean_buffer(char * buffer){
-    for(int i=0;i<256;i++)
+    int i;
+    for(i=0;i<256;i++)
         buffer[i]='\0';
 }
 
@@ -29,13 +30,14 @@ void encode_answer(char random_message[181]){
 
     srand(time(0));
     // fills message with random letters
-    for(int i=0; i<180; i++){
+    int i;
+    for(i=0; i<180; i++){
         random_message[i] = 'a'+((rand() % (25 + 1 - 0)) + 0);
     }
     random_message[180]='\0';
 
     // generates six spaces
-    for(int i=0; i<6; i++){
+    for(i=0; i<6; i++){
         int index = (30*i) + ((rand() % (29 + 1 - 0)) + 0);
 
         // this is not entirely correct, it could fail in a very special case
@@ -54,7 +56,8 @@ void encode_answer(char random_message[181]){
     int index=0;
     int max=5;
     int min=1;
-    for(int i=0, j=0; i<answer_length; i++, j++){
+    int j;
+    for(i=0, j=0; i<answer_length; i++, j++){
 
         //changes max value for a better distribution
         if(j%5==0){
