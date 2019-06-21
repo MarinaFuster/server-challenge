@@ -46,7 +46,7 @@ void encode_answer(char random_message[181]){
         else
             random_message[index]=' ';
     }
-    
+
     // hides the answer in the message
     char * answer="larespuestaalacertijoesindeterminado";
     int answer_length=strlen(answer);
@@ -65,7 +65,7 @@ void encode_answer(char random_message[181]){
         index = index + ((rand() % (max + 1 - min)) + min);
         if(random_message[index]==' ')
             index=index+1;
-            
+
         random_message[index]=answer[i];
     }
 
@@ -97,20 +97,29 @@ void libc(int client_socket){
     puts(FINAL_MESSAGE);
 }
 
-// DONE ? NO
+void gdbmeres(){
+  if(0){
+    char * right = "gdb rules";
+  }else{
+    char * wrong = "try again";
+  }
+}
+
+// DONE (Think so...)
 void gdbme(int client_socket){
     char * challenge="b gdbme y encontrá el valor mágico\ntry again";
     char * answer="gdb rules\n";
+    gdbmeres();
     execute_challenge(challenge, ELEVENTH_Q, answer, client_socket);
     libc(client_socket);
 }
 
 void quine(int client_socket){
-    
+
     int exit_status;
     exit_status=system("gcc -o ./quine.o ./quine.c; ./quine.o");
-    
-    if(exit_status==EXIT_SUCCESS){    
+
+    if(exit_status==EXIT_SUCCESS){
         char * challenge="La respuesta a este desafio es cachiporra";
         char * answer="cachiporra\n";
         execute_challenge(challenge, TENTH_Q, answer, client_socket);
@@ -143,24 +152,30 @@ void mixed_fds(int client_socket){
 void sections(int client_socket){
     char * challenge=".data .bss .comment ? .shstrtab .symtab .strtab";
     char * answer=".runme\n";
+
     execute_challenge(challenge, SEVENTH_Q, answer, client_socket);
     mixed_fds(client_socket);
 }
 
-// DONE ? NO
+// DONE (I think so....)
 void pumpkin(int client_socket){
-    char * challenge="respuesta = strings[224]";
+  //If new strings created then this number could change!
+    char * challenge="respuesta = strings[86]";
     char * answer="easter_egg\n";
     execute_challenge(challenge, SIXTH_Q, answer, client_socket);
     sections(client_socket);
 }
 
-// DONE ? NO
+// DONE
 void ebadf(int client_socket){
     char * challenge="EBADF... abrilo y verás";
     char * answer="cabeza de calabaza\n";
-    execute_challenge(challenge, FIFTH_Q, answer, client_socket);
-    pumpkin(client_socket);
+    if(fork()==0){
+      write(10,answer,sizeof(*answer)); //Write in a wrong file descriptor
+    }else{
+      execute_challenge(challenge, FIFTH_Q, answer, client_socket);
+      pumpkin(client_socket);
+    }
 }
 
 void vocaroo(int client_socket){
