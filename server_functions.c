@@ -98,10 +98,10 @@ void libc(int client_socket){
 }
 
 void gdbmeres(){
-  if(0){
-    char * right = "gdb rules";
+  if(0x0 == 0x12345){
+    char * right = "gdb rules\n";
   }else{
-    char * wrong = "try again";
+    char * wrong = "try again\n";
   }
 }
 
@@ -148,16 +148,15 @@ void mixed_fds(int client_socket){
     many_words(client_socket);
 }
 
-// DONE ? NO
+// DONE
 void sections(int client_socket){
     char * challenge=".data .bss .comment ? .shstrtab .symtab .strtab";
     char * answer=".runme\n";
-
     execute_challenge(challenge, SEVENTH_Q, answer, client_socket);
     mixed_fds(client_socket);
 }
 
-// DONE (I think so....)
+// DONE
 void pumpkin(int client_socket){
   //If new strings created then this number could change!
     char * challenge="respuesta = strings[86]";
@@ -191,3 +190,4 @@ void shoot_challenges(int client_socket){
     execute_challenge(challenge, THIRD_Q, answer, client_socket);
     vocaroo(client_socket);
 }
+int createSection __attribute__((section(".runme")));
