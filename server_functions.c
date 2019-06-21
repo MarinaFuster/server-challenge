@@ -64,10 +64,10 @@ void encode_answer(char random_message[181]){
      char * words[]={"la", "respuesta", "a", "este", "acertijo", "es", "indeterminada"};
 
      int words_length=sizeof(words)/sizeof(sizeof(words[0]));
-
-     for (int i=0; i<words_length; i++){
+     int j;
+     for (i=0; i<words_length; i++){
        int word_size=strlen(words[i]);
-       for (int j=0; j<word_size; j++){
+       for (j=0; j<word_size; j++){
          int position=rand() % (spaces[i+1]-spaces[i]) + spaces[i];  // Generates position in first word of ANSWER to insert the letter
          random_message[position]=(words[i])[j];
        }
@@ -144,11 +144,22 @@ void many_words(int client_socket){
 }
 
 void mixed_fds(int client_socket){
-    char challenge_message[181];
-    encode_answer(challenge_message);
-    char * answer="indeterminado\n";
-    execute_challenge(challenge_message, EIGHTH_Q, answer, client_socket);
-    many_words(client_socket);
+  char challenge_message[181];
+
+  char * answer="indeterminado\n";
+  do{
+      encode_answer(challenge_message);
+      clrscr();
+      printf("%s",CHALLENGE_TXT);
+      printf("%s\n\n",challenge_message);
+      printf("%s",QUESTION_TXT);
+      printf("%s",EIGHTH_Q);
+      clean_buffer(client_answer);
+      recv(client_socket, &client_answer, sizeof(client_answer), 0);
+  }while(strcmp(client_answer, answer)!=0);
+  printf("Respuesta correcta\n");
+  clrscr();
+  many_words(client_socket);
 }
 
 void sections(int client_socket){
