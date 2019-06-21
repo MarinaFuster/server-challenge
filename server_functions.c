@@ -69,6 +69,12 @@ void encode_answer(char random_message[181]){
        int word_size=strlen(words[i]);
        for (j=0; j<word_size; j++){
          int position=rand() % (spaces[i+1]-spaces[i]) + spaces[i];  // Generates position in first word of ANSWER to insert the letter
+         if(position==spaces[i]){
+           position++;
+         }
+         else if(position==spaces[i+1]){
+           position--;
+         }
          random_message[position]=(words[i])[j];
        }
      }
