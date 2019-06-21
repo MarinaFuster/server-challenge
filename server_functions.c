@@ -105,7 +105,6 @@ void gdbmeres(){
   }
 }
 
-// DONE (Think so...)
 void gdbme(int client_socket){
     char * challenge="b gdbme y encontrá el valor mágico\ntry again";
     char * answer="gdb rules\n";
@@ -148,7 +147,6 @@ void mixed_fds(int client_socket){
     many_words(client_socket);
 }
 
-// DONE
 void sections(int client_socket){
     char * challenge=".data .bss .comment ? .shstrtab .symtab .strtab";
     char * answer=".runme\n";
@@ -156,7 +154,6 @@ void sections(int client_socket){
     mixed_fds(client_socket);
 }
 
-// DONE
 void pumpkin(int client_socket){
   //If new strings created then this number could change!
     char * challenge="respuesta = strings[86]";
@@ -165,7 +162,6 @@ void pumpkin(int client_socket){
     sections(client_socket);
 }
 
-// DONE
 void ebadf(int client_socket){
     char * challenge="EBADF... abrilo y verás";
     char * answer="cabeza de calabaza\n";
