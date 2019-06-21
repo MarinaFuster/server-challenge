@@ -56,7 +56,7 @@ void encode_answer(char random_message[181]){
         }
         else if(i!=0){
           word_size=strlen(words[i]);
-          if(index-spaces[i+1]<word_size){
+          if(index-spaces[i]<word_size){
             index+=word_size-(index-spaces[i+1]);
           }
         }
