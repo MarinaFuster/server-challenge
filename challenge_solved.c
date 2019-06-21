@@ -13,7 +13,8 @@
 */
 
 void clean_buffer(char * buffer){
-    for(int i=0;i<256;i++)
+    int i;
+    for(i=0;i<256;i++)
         buffer[i]='\0';
 }
 
@@ -43,21 +44,21 @@ int main(int argc , char *argv[])
 		puts(ch2);
 		sleep(3);
 		send(socket_desc , ch2 , strlen(ch2) , 0);
-		
-		
+
+
 		// third challenge: #0854780*
 		char ch3[11] = {'#','0','8','5','4','7','8','0','*','\n','\0'};
 		puts(ch3);
 		sleep(3);
 		send(socket_desc , ch3 , strlen(ch3) , 0);
-		
+
 		/*
 		// fourth challenge: nokia
 		char ch4[7] = {'n','o','k','i','a','\n','\0'};
 		puts(ch4);
 		sleep(3);
 		send(socket_desc , ch4 , strlen(ch4) , 0);
-		
+
 
 		// fifth challenge: cabeza de calabaza
 		char ch5[20] = {'c','a','b','e','z','a',' ','d','e',' ','c','a','l','a','b','a','z','a','\n','\0'};
@@ -78,7 +79,7 @@ int main(int argc , char *argv[])
 		puts(ch7);
 		sleep(3);
 		send(socket_desc , ch7 , strlen(ch7) , 0);
-		
+
 
 		// eighth challenge: indeterminado
 		char ch8[15] = {'i','n','d','e','t','e','r','m','i','n','a','d','o','\n','\0'};
@@ -98,7 +99,7 @@ int main(int argc , char *argv[])
 		puts(ch10);
 		sleep(3);
 		send(socket_desc , ch10 , strlen(ch10) , 0);
-		
+
 
 		// eleventh challenge: gdb rules
 		char ch11[11] = {'g','d','b',' ','r','u','l','e','s','\n','\0'};
