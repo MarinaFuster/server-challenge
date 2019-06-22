@@ -82,12 +82,10 @@ void encode_answer(char random_message[181]){
        int to_insert_size=spaces[i+1]-spaces[i];  // CHECKED
        word_size=strlen(words[i]);
        int zone_size=to_insert_size/word_size;
-       printf("BETWEEN SPACES: %d\n",to_insert_size);
-       printf("ZONE: %d\n",zone_size );
-       printf("WORD SIZE: %d\n",word_size );
-       printf("----------\n");
        int prev_zone=spaces[i];
-       for (int j=0; j<word_size; j++){
+
+
+      for (int j=0; j<word_size; j++){
          int position=(rand() % (zone_size)) + prev_zone;  // Generates position in first word of ANSWER to insert the letter
 
          if(position==spaces[i]){
@@ -96,10 +94,8 @@ void encode_answer(char random_message[181]){
          else if(position==spaces[i+1]){
            position--;
          }
-         else if(position>spaces[i+1]){
-           printf("SE PASO\n" );
-         }
-         random_message[position]=(words[i])[j]-32;
+
+         random_message[position]=(words[i])[j];
          prev_zone+=zone_size;
        }
      }
