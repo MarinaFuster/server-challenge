@@ -37,68 +37,40 @@ void encode_answer(char random_message[181]){
     random_message[180]='\0';
 
     // generates six spaces
-    int spaces[8];
-    spaces[0]=0;
-    spaces[7]=179;
-
-    char * words[]={"la", "respuesta", "a", "este", "acertijo", "es", "indeterminada"};
-    int words_length=sizeof(words)/sizeof(sizeof(words[0]));
-    int word_size=2;
-
     for(i=0; i<6; i++){
         int index = (30*i) + ((rand() % (29 + 1 - 0)) + 0);
 
-        if(i==5){
-          word_size=strlen(words[i+1]);
-          if(180-index<word_size){
-            index-=word_size;
-          }
-        }
-        else if(i!=0){
-          word_size=strlen(words[i]);
-          if(index-spaces[i]<word_size){
-            index+=word_size-(index-spaces[i+1]);
-          }
-        }
-
         // this is not entirely correct, it could fail in a very special case
-        if( index==0 || (index>0 && random_message[index-1]==' ')){  // For not having two contiguos spaces or at the beginning
+        if( index==0 || (index>0 && random_message[index-1]==' '))
             random_message[index+1]=' ';
-            spaces[i+1]=index+1;
-        }
-        else if( index==179 ){
+        else if( index==179 )
             random_message[index-1]=' ';
-            spaces[i+1]=index-1;
-        }
-        else{
+        else
             random_message[index]=' ';
-            spaces[i+1]=index;
-        }
     }
 
-
     // hides the answer in the message
-     for (int i=0; i<words_length; i++){
-       int to_insert_size=spaces[i+1]-spaces[i];  // CHECKED
-       word_size=strlen(words[i]);
-       int zone_size=to_insert_size/word_size;
-       int prev_zone=spaces[i];
+    char * answer="larespuestaaesteacertijoesindeterminado";
+    int answer_length=strlen(answer);
 
+    int index=0;
+    int max=5;
+    int min=1;
+    int j;
+    for(i=0, j=0; i<answer_length; i++, j++){
 
-      for (int j=0; j<word_size; j++){
-         int position=(rand() % (zone_size)) + prev_zone;  // Generates position in first word of ANSWER to insert the letter
+        //changes max value for a better distribution
+        if(j%5==0){
+            int left=180-index;
+            max=left/(answer_length-i);
+        }
 
-         if(position==spaces[i]){
-           position++;
-         }
-         else if(position==spaces[i+1]){
-           position--;
-         }
+        index = index + ((rand() % (max + 1 - min)) + min);
+        if(random_message[index]==' ')
+            index=index+1;
 
-         random_message[position]=(words[i])[j];
-         prev_zone+=zone_size;
-       }
-     }
+        random_message[index]=answer[i];
+    }
 
 }
 
