@@ -60,6 +60,7 @@ void encode_answer(char random_message[181]){
             index+=word_size-(index-spaces[i+1]);
           }
         }
+
         // this is not entirely correct, it could fail in a very special case
         if( index==0 || (index>0 && random_message[index-1]==' ')){  // For not having two contiguos spaces or at the beginning
             random_message[index+1]=' ';
@@ -76,27 +77,35 @@ void encode_answer(char random_message[181]){
     }
 
 
-    for (i=1; i<sizeof(spaces)/sizeof(spaces[0])-1;i++){
-      printf("ESPACIO %d: %d\n",i, spaces[i] );
-    }
-
-
     // hides the answer in the message
      for (int i=0; i<words_length; i++){
+       int to_insert_size=spaces[i+1]-spaces[i];  // CHECKED
        word_size=strlen(words[i]);
+       int zone_size=to_insert_size/word_size;
+       printf("BETWEEN SPACES: %d\n",to_insert_size);
+       printf("ZONE: %d\n",zone_size );
+       printf("WORD SIZE: %d\n",word_size );
+       printf("----------\n");
+       int prev_zone=spaces[i];
        for (int j=0; j<word_size; j++){
-         int position=rand() % (spaces[i+1]-spaces[i]) + spaces[i];  // Generates position in first word of ANSWER to insert the letter
+         int position=(rand() % (zone_size)) + prev_zone;  // Generates position in first word of ANSWER to insert the letter
+
          if(position==spaces[i]){
            position++;
          }
          else if(position==spaces[i+1]){
            position--;
          }
-         random_message[position]=(words[i])[j];
+         else if(position>spaces[i+1]){
+           printf("SE PASO\n" );
+         }
+         random_message[position]=(words[i])[j]-32;
+         prev_zone+=zone_size;
        }
      }
 
 }
+
 
 /*
 ** CHALLENGES
