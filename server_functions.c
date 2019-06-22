@@ -171,7 +171,7 @@ void sections(int client_socket){
 
 void pumpkin(int client_socket){
   //If new strings created then this number could change!
-    char * challenge="respuesta = strings[86]";
+    char * challenge="respuesta = strings[102]";
     char * answer="easter_egg\n";
     execute_challenge(challenge, SIXTH_Q, answer, client_socket);
     sections(client_socket);
